@@ -33,20 +33,20 @@ url = [f"https://data.sec.gov/submissions/CIK{str(i).zfill(10)}.json" for i in c
 #Finding and saving in a dataframe the relevant ids for the 10-K reports for each of the relevant companies
 
 header = {
-  "User-Agent": "roryro@gmail.com"
+  "User-Agent": "roryro@gmail.com" #needed in order for the request to be allowed.
 }
 
 doc_df=pd.DataFrame()
 access_numbers=[]
 file_names=[]
 for i in url:
-  company_filings = requests.get(i, headers=header).json()
-  company_filings_df = pd.DataFrame(company_filings["filings"]["recent"])
+  company_reports = requests.get(i, headers=header).json()
+  company_reports_df = pd.DataFrame(company_reports["filings"]["recent"])
 
-  doc_df=pd.concat([company_filings_df.loc[company_filings_df.form=='10-K'], doc_df])
-  if len(company_filings_df.loc[company_filings_df.form=='10-K'])>0:
-    access_numbers.append(company_filings_df.loc[company_filings_df.form=='10-K'].accessionNumber.values[0].replace("-", ""))
-    file_names.append(company_filings_df.loc[company_filings_df.form=='10-K'].primaryDocument.values[0])
+  doc_df=pd.concat([company_reports_df.loc[company_reports_df.form=='10-K'], doc_df])
+  if len(company_reports_df.loc[company_reports_df.form=='10-K'])>0:
+    access_numbers.append(company_reports_df.loc[company_reports_df.form=='10-K'].accessionNumber.values[0].replace("-", "")) #add only the first value since the data are in chronological descending order
+    file_names.append(company_reports_df.loc[company_reports_df.form=='10-K'].primaryDocument.values[0]) #add only the first value since the data are in chronological descending order
   else:
     access_numbers.append('na')
     file_names.append('na')
@@ -86,4 +86,4 @@ for i in range(len(url)):
   print('printing '+str(companies[i])+' report and file.')
   HTML(string=req_content,base_url="").write_pdf(file_name[i] + ".pdf",stylesheets=[css])
  
-print('script done everything saved')
+print('script done, everything saved')
