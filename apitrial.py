@@ -33,7 +33,7 @@ url = [f"https://data.sec.gov/submissions/CIK{str(i).zfill(10)}.json" for i in c
 # Finding and saving in a dataframe the relevant ids for the 10-K reports for each of the relevant companies
 
 header = {
-  "User-Agent": "roryro@gmail.com" #needed in order for the request to be allowed.
+  "User-Agent": "roryro@gmail.com" # needed in order for the request to be allowed.
 }
 
 doc_df=pd.DataFrame()
