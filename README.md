@@ -10,20 +10,20 @@ The repository is made of:
 # How to run the script
 
 ## Linux 
-In a terminal:
+After cloning the repository, use a terminal to go to the folder where you saved the repository on your pc and:
 1. Create and activate a python virtual environment ('python3 -m venv .venv' and then 'source .venv/bin/activate')
 2. Install the requirements ('pip3 install -r  requirements.txt')
 3. Run the script ('python3 apitrial.py')
 
 ## Mac
-In a terminal:
+After cloning the repository, use a terminal to go to the folder where you saved the repository on your pc and:
 1. Create and activate a python virtual environment ('python3 -m venv .venv' and then 'source .venv/bin/activate')
 2. Install the requirements ('pip3 install -r  requirements.txt')
 3. Run the script ('python3 apitrial.py')
 4. In case of errors with the libgobject libraries run the command 'export DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib:$DYLD_FALBACK_LIBRARY_PATH' to point to the correct folder with the graphical libraries and then rerun the script.
 
 ## Windows
-In a terminal:
+After cloning the repository, use a terminal to go to the folder where you saved the repository on your pc and:
 1. Create and activate a python virtual environment ('python3 -m venv .venv' and then '.venv\Scripts\activate')
 2. Install the requirements ('pip3 install -r  requirements.txt')
 3. Run the script ('python3 apitrial.py')
