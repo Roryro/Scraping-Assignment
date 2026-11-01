@@ -29,4 +29,4 @@ After cloning the repository, use a terminal to go to the folder where you saved
 3. Run the script ('python3 apitrial.py')
 4. In case of errors with the libgobject libraries install msys2 on the pc, run in the msys2 GUI the command 'pacman -S mingw-w64-x86_64-pango' to install the graphical libraries needed, decomment in the beginning of the script apitrial.py the line 'os.add_dll_directory(r"C:\msys64\mingw64\bin")' and then rerun the script.
 
-The script runs for about 4 minutes (feedback on the process in progress will appear in the terminal) and saves the HTM and the PDF files in the same folder where the script is. Of course the code is far from perfect and with more time available it could be improved further.
+The script runs for about 3 minutes (feedback on the process in progress will appear in the terminal) and saves the HTM and the PDF files in the same folder where the script is. Of course the code is far from perfect and with more time available it could be improved further.
