@@ -1,4 +1,4 @@
-#Importing libraries
+# Importing libraries
 
 import requests
 import pandas as pd
@@ -7,13 +7,13 @@ import sys
 import os
 
 
-#os.add_dll_directory(r"C:\msys64\mingw64\bin")
+# os.add_dll_directory(r"C:\msys64\mingw64\bin")
 
-#Reading the CIK list file retrieved online
+# Reading the CIK list file retrieved online
 cik_list=pd.read_csv("CIK_list.txt",sep=":00",header=None,engine='python')
 cik_list_df=pd.DataFrame(cik_list)
 
-#Retrieving the CIK of the relevant companies companies 
+# Retrieving the CIK of the relevant companies companies 
 
 companies=['APPLE INC.','META PLATFORMS','ALPHABET INC.','AMAZON COM INC','NETFLIX INC','GOLDMAN SACHS GROUP INC']
 
@@ -26,11 +26,11 @@ for i in companies:
       cik_companies.append(cik_list_df[1][j].strip(':'))
 cik_companies=cik_companies[0:6]
 
-#Creating the url to find the document submitted by each of the relevant companies
+# Creating the url to find the document submitted by each of the relevant companies
 
 url = [f"https://data.sec.gov/submissions/CIK{str(i).zfill(10)}.json" for i in cik_companies]
 
-#Finding and saving in a dataframe the relevant ids for the 10-K reports for each of the relevant companies
+# Finding and saving in a dataframe the relevant ids for the 10-K reports for each of the relevant companies
 
 header = {
   "User-Agent": "roryro@gmail.com" #needed in order for the request to be allowed.
@@ -45,10 +45,10 @@ for i in url:
 
   doc_df=pd.concat([company_reports_df.loc[company_reports_df.form=='10-K'], doc_df])
   if len(company_reports_df.loc[company_reports_df.form=='10-K'])>0:
-    access_numbers.append(company_reports_df.loc[company_reports_df.form=='10-K'].accessionNumber.values[0].replace("-", "")) #add only the first value since the data are in chronological descending order
-    file_names.append(company_reports_df.loc[company_reports_df.form=='10-K'].primaryDocument.values[0]) #add only the first value since the data are in chronological descending order
+    access_numbers.append(company_reports_df.loc[company_reports_df.form=='10-K'].accessionNumber.values[0].replace("-", "")) # add only the first value since the data are in chronological descending order
+    file_names.append(company_reports_df.loc[company_reports_df.form=='10-K'].primaryDocument.values[0]) # add only the first value since the data are in chronological descending order
   else:
-    access_numbers.append('na')
+    access_numbers.append('na') # fallback in case of missing records
     file_names.append('na')
 
 
@@ -58,7 +58,7 @@ access_number = [i for i in access_numbers]
 
 file_name = [i for i in file_names]
 
-#Creating the API request to fetch the 10-K report documents, save the htm files and convert them to PDF format.
+# Creating the API request to fetch the 10-K report documents, save the htm files and convert them to PDF format.
 
 url = [f"https://www.sec.gov/Archives/edgar/data/{CIK[i]}/{access_number[i]}/{file_name[i]}" for i in range(len(CIK))]
 
